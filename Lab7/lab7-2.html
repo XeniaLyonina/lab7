@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xenia Lyonina</title>
+</head>
+<body>
+    <style>
+        .styled_link a {
+            color: #000;
+            text-decoration-style: dashed;
+        }
+    </style>
+    <ul id="ul">
+        <li><a href="index-html">index-html</a></li>
+        <li><a href="https://google.com">https://google.com</a></li>
+        <li><a href="https://www.gstu.by/">https://www.gstu.by/</a></li>
+        <li><a href="file://G:/users/RPI/test.html">file://G:/users/RPI/test.html</a></li>
+        <li><a href="/local/path">/local/path</a></li>
+        <li><a href="http://www.php.su/">http://www.php.su/</a></li>
+        <li><a href="/images/cat.jpg">/images/cat.jpg</a></li>
+        <li><a href="https://www.tut.by/">https://www.tut.by/</a></li>
+    </ul>
+<script>
+    const ul = document.getElementById("ul");
+    const listLi = ul.children;
+
+    for (const child of listLi) {
+        let text = child.textContent;
+        if (text.indexOf("http://") == 0 || text.indexOf("https://") == 0) {
+            child.classList.add("styled_link");
+        }
+    }
+</script>
+</body>
+</html>

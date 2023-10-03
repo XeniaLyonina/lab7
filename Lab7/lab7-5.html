@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xenia Lyonina</title>
+</head>
+<body>
+    <style>
+        #tree {
+            position: relative;
+            margin: 0 auto;
+            max-width: 300px;
+            width: 100%;
+        }
+        #tree > * {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            z-index: 1;
+        }
+        .top {
+            z-index: 2 !important;
+        }
+    </style>
+    <div id="tree">
+        <div style="background-color: plum; top: 0;"></div>
+        <div style="background-color: skyblue; top: 60px; left: 60px;" class="top"></div>
+        <div style="background-color: palegreen; top: 120px; left: 120px;"></div>
+    </div>
+<script>
+    const tree = document.getElementById("tree");
+
+    for (const child of tree.children) {
+        child.onclick = function () {
+            [...this.parentNode.children].filter(n => n !== this).forEach(e => e.classList.remove("top"))
+            child.classList.add("top");
+        }
+    }
+</script>
+</body>
+</html>

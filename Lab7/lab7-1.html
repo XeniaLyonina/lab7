@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xenia Lyonina</title>
+</head>
+<body>
+    <style>
+        table {
+            border: 1px solid #000;
+        }
+        table * {
+            border: 1px solid #000;
+        }
+    </style>
+    <table id="table">
+        <thead>
+            <tr>
+                <th>Цена</th>
+                <th>Дата релиза</th>
+                <th>Аналоговые выходы</th>
+                <th>Аналоговые входы</th>
+                <th>Микрофонные входы</th>
+                <th>Тип</th>
+                <th>Количество каналов</th>
+                <th>Интерфейс подключения</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        </table>
+<script>
+    class SoundCard {
+        constructor(analog_outputs, analog_inputs, microphone_inputs, type, number_of_channels, connection_interface)
+         {
+            this.analog_outputs = analog_outputs;
+            this.analog_inputs = analog_inputs;
+            this.microphone_inputs = microphone_inputs;
+            this.type=type;
+            this.number_of_channels=number_of_channels;
+            this.connection_interface=connection_interface;
+        }
+
+        get getInfo() {
+            return `${this.analog_outputs}, ${this.analog_inputs},${this.microphone_inputs},${this.type},${this.number_of_channels},${this.connection_interface}`
+        }
+        set getInfo(value) {
+            [this.analog_outputs, this.analog_inputs, this.microphone_inputs,this.type,this.number_of_channels,this.connection_interface] = value.split(" ");
+        }
+        showInfo() {
+            console.log(`
+                Аналоговые выходы: ${this.analog_outputs}
+                Аналоговые входы ${this.analog_inputs}
+                Микрофонные входы: ${this.microphone_inputs}
+                Тип: ${this.type}
+                Количество каналов ${this.number_of_channels}
+                Интерфейс подключения ${this.connection_interface}
+            `)
+        }
+    }
+
+    class ReleaseInfoSoundCard extends SoundCard {
+        constructor (price, date, analog_outputs, analog_inputs, microphone_inputs, type, number_of_channels, connection_interface) {
+            super(analog_outputs, analog_inputs, microphone_inputs, type, number_of_channels, connection_interface);
+            this.price = price;
+            this.releaseDate = date;
+        }
+
+        showInfo() {
+            console.log(`
+            Обновленная информация
+                Цена: ${this.price}
+                Дата релиза: ${this.releaseDate}
+                Аналоговые выходы: ${this.analog_outputs}
+                Аналоговые входы ${this.analog_inputs}
+                Микрофонные входы: ${this.microphone_inputs}
+                Тип: ${this.type}
+                Количество каналов ${this.number_of_channels}
+                Интерфейс подключения ${this.connection_interface}
+            `)
+        }
+    }
+
+    const cards = [];
+    for (let i = 0; i < 10; i++) {
+        cards[i] = new ReleaseInfoSoundCard( 10200,"00/00/0000", "Мониторный выход", "Линейный вход", "да", "внешняя", 8, "PCI")
+    }
+
+    let table = document.getElementById("table");
+    let tbody = table.getElementsByTagName("tbody")[0];
+
+    for (let i = 0; i < cards.length; i++) {
+            let card = cards[i];
+            let row = document.createElement("tr");
+
+            let price = document.createElement("td");
+            let releaseDate = document.createElement("td");
+            let analog_outputs = document.createElement("td");
+            let analog_inputs = document.createElement("td");
+            let microphone_inputs = document.createElement("td");
+            let type = document.createElement("td");
+            let number_of_channels = document.createElement("td");
+            let connection_interface = document.createElement("td");
+    
+            price.innerHTML = card.price;
+            releaseDate.innerHTML = card.releaseDate;
+            analog_outputs.innerHTML = card.analog_outputs;
+            analog_inputs.innerHTML = card.analog_inputs;
+            microphone_inputs.innerHTML = card.microphone_inputs;
+            type.innerHTML = card.type ;
+            number_of_channels.innerHTML = card.number_of_channels;
+            connection_interface.innerHTML = card.onnection_interface;
+            
+            row.appendChild(price);
+            row.appendChild(releaseDate);
+            row.appendChild(analog_outputs);
+            row.appendChild(analog_inputs);
+            row.appendChild(microphone_inputs);
+            row.appendChild(type);
+            row.appendChild(number_of_channels);
+            row.appendChild(connection_interface);
+    
+            tbody.appendChild(row);
+        }
+</script>
+</body>
+</html>

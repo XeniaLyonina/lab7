@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xenia Lyonina</title>
+</head>
+<body>
+    <style>
+        * {
+            user-select: none;
+        }
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+        li {
+          cursor: pointer;
+        }
+        .selected {
+          color: orange;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            cursor: pointer;
+            transition: color 0.3s ease-in-out;
+        }
+        li.selected {
+            color: orange;
+        }
+        li:hover {
+            font-weight: bold;
+        }
+    </style>
+    <ul id="book-list">
+        <li>Антон Чехов - Вишневый сад</li>
+        <li>Александр Солженицын- Роковой корпус</li>
+        <li>Александр Дюма - Три мушкетера</li>
+        <li>Александр Пушкин - Пиковая дама</li>
+        <li>Лев Толстой - Детство</li>
+        <li>Энн Броте - Агнес Грей</li>
+        <li>Александр Куприн - Олеся</li>
+        <li>Александр Грин - Алые паруса</li>
+        <li>Ральф Эллисон - Человек-невидимка</li>
+        <li>Вирджиния Вулф - На маяк</li>
+        <li>Михаил Булгаков - Мастер и Маргарита</li>
+        <li>Иван Тургенев - Отцы и дети</li>
+        <li>Лев Толстой - Воскресенье</li>
+        <li>Фёдор Достоевский - Белые ночи</li>
+        <li>Лев Толстой - Война и мир</li>
+        <li>Джеймс Джойс - Улисс</li>
+        <li>Антон Чехов - Человек в футляре</li>
+        <li>Уильям Фолкнер - Звук и ярость</li>
+        <li>Александр Дюма - Две Дианы</li>
+        <li>Вирджиния Вулф - На маяк</li>
+        <li>Антон Чехов - Повести и рассказы</li>
+        <li>Айн Рэнд - Атлант расправил плечи</li>
+        <li>Антон Чехов - Чайка</li>
+        <li>Ганс Христиан Андерсен - Дикие лебеди</li>
+        <li>Лев Толстой - Война и мир</li>
+        <li>Джеймс Джойс - Улисс</li>
+        <li>Александр Пушкин - Евгений Онегин</li>
+        <li>Уильям Фолкнер - Звук и ярость</li>
+        <li>Иван Тургенев - Ася</li>
+        <li>Александр Пушкин - Дубровский</li>
+      </ul>
+    <script>
+        const bookList = document.getElementById('book-list');
+        let selectedItems = new Set(); // Множество выбранных элементов
+
+    function selectItem(item, ctrlKey, shiftKey) {
+        if (ctrlKey) {
+            item.classList.toggle('selected');
+            if (item.classList.contains('selected')) {
+                selectedItems.add(item);
+            } else {
+                selectedItems.delete(item);
+            }
+        } else if (shiftKey && selectedItems.size > 0) {
+            const firstItem = [...selectedItems][0];
+            let rangeSelected = false;
+            bookList.querySelectorAll('li').forEach((li) => {
+            if (li === firstItem || li === item) {
+                rangeSelected = !rangeSelected;
+                li.classList.add('selected');
+                if (rangeSelected) {
+                selectedItems.add(li);
+                } else {
+                selectedItems.delete(li);
+                }
+            } else if (rangeSelected) {
+                li.classList.add('selected');
+                selectedItems.add(li);
+            } else {
+                li.classList.remove('selected');
+                selectedItems.delete(li);
+            }
+            });
+        } else {
+            item.classList.toggle('selected');
+            if (item.classList.contains('selected')) {
+                selectedItems.clear();
+                selectedItems.add(item);
+            } else {
+                selectedItems.delete(item);
+            }
+        }
+    }
+
+    bookList.querySelectorAll('li').forEach((li) => {
+    li.addEventListener('click', (event) => {
+        selectItem(event.currentTarget, event.ctrlKey, event.shiftKey);
+    });
+    });
+</script>
+</body>
+</html>

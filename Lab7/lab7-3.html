@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Xenia Lyonina</title>
+</head>
+<body>
+    <style>
+        ul {
+            list-style: none;
+            position: relative;
+            z-index: 2;
+            background: plum;
+        }
+        li {
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            background: skyblue;
+        }
+        li:hover {
+            font-weight: bold;
+        }
+        .collapsed > ul {
+            font-weight: 400;
+            background: pink;
+            display: block !important;
+        }
+        .hovered {
+            font-weight: bold;
+        }
+
+    </style>
+    <ul id="tree">
+        <li>
+            [documents]
+        </li>
+        <li>
+            [1]
+            <ul>
+                <li>1
+                    <ul>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                    </ul>
+                </li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
+        </li>
+        <li>
+            [ABC]
+            <ul>
+                <li>one</li>
+                <li>two</li>
+                <li>three</li>
+            </ul>
+        </li>
+        <li>
+            [MRS]
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
+        </li>
+        <li>
+            [Temp]
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
+        </li>
+        <li>
+            [Test]
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
+        </li>
+    </ul>
+<script>
+    const tree = document.getElementById('tree');
+
+    for (const child of tree.children) {
+        
+ }
+
+// Добавление обработчиков событий для элементов списка
+    function addListeners(node) {
+        node.addEventListener('click', () => {
+            node.classList.toggle('collapsed');
+            console.log(node.children[0])
+
+        });
+        node.addEventListener('mouseover', () => {
+            node.classList.add('hovered');
+        });
+        node.addEventListener('mouseout', () => {
+            node.classList.remove('hovered');
+        });
+        // Рекурсивное добавление обработчиков для вложенных элементов
+        node.querySelectorAll('li').forEach(addListeners);
+    }
+
+// // Инициализация обработчиков для корневого элемента списка
+    addListeners(tree);
+
+
+</script>
+</body>
+</html>
